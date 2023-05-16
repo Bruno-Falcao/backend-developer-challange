@@ -3,13 +3,10 @@ package com.cayena.backenddeveloper.service;
 import com.cayena.backenddeveloper.exceptions.NotFoundException;
 import com.cayena.backenddeveloper.model.Product;
 import com.cayena.backenddeveloper.repository.ProductRepository;
-import com.cayena.backenddeveloper.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import static com.cayena.backenddeveloper.utils.Utils.currentDate;
 
@@ -17,11 +14,9 @@ import static com.cayena.backenddeveloper.utils.Utils.currentDate;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final SupplierRepository repository;
 
-    public ProductService(ProductRepository productRepository, SupplierRepository repository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.repository = repository;
     }
 
     /**
@@ -36,16 +31,23 @@ public class ProductService {
     }
 
     /**
-     * Find a product using the id as parameter
+     * Find a product using the id as parameter.
      *
-     * @param id
-     * @return
+     * @param id The id of the product.
+     * @return The specified product
      */
-    public Optional<Product> findProductById(Integer id) {
-        return Optional.of(productRepository.findById(id))
+    public Product findProductById(Integer id) {
+        return productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
+    /**
+     * Save a new product.
+     *
+     * @param product The product to be saved.
+     * @return A Success String.
+     * @throws Exception If an error occurs during the saveProduct method.
+     */
     public String saveProduct(Product product) throws Exception {
         if (saveProductValidation(product)) {
             product.setDateOfCreation(currentDate());
@@ -56,11 +58,54 @@ public class ProductService {
         throw new Exception("Error saving product");
     }
 
+    /**
+     * Updates the fields of a Product.
+     *
+     * @param product
+     * @return A message that indicates the success of the operation.
+     * @throws Exception if the update validation fails or the product is not found.
+     */
+    public String updateProduct(Product product) throws Exception {
+        Product existingProduct = findProductById(product.getId());
+
+        if (updateProductValidation(product)) {
+            existingProduct.setName(product.getName());
+            existingProduct.setQuantity(product.getQuantity());
+            existingProduct.setUnitPrice(product.getUnitPrice());
+            existingProduct.setSupplierId(product.getSupplierId());
+            existingProduct.setDateOfLastUpdate(currentDate());
+            productRepository.save(existingProduct);
+
+            return "Product updated successfully";
+        }
+
+        throw new Exception("Product not found");
+    }
+
+    /**
+     * Delete a product by its ID.
+     *
+     * @param id of the Product.
+     * @return a success String.
+     */
+    public String deleteProduct(Integer id) {
+        Product existingProduct = findProductById(id);
+
+        productRepository.delete(existingProduct);
+        return "Product deleted";
+    }
+
+    private static boolean updateProductValidation(Product product) {
+        return product.getName() != null && product.getQuantity() >= 0
+                && product.getUnitPrice().compareTo(BigDecimal.ZERO) > 0
+                && product.getDateOfCreation() != null;
+    }
+
     private boolean saveProductValidation(Product product) {
         return product.getId() == null && product.getName() != null && product.getQuantity() >= 0
-                && product.getUnitPrice() != null && product.getUnitPrice().compareTo(BigDecimal.ZERO) > 0
+                && product.getUnitPrice().compareTo(BigDecimal.ZERO) > 0
                 && product.getDateOfCreation() == null
-                && product.getDateOfCreation().isBefore(product.getDateOfLastUpdate());
+                && product.getDateOfLastUpdate() == null;
     }
 
     private void isEmptyList(List<Product> products) {

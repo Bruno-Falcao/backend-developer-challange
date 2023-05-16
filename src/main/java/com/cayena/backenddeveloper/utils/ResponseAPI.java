@@ -15,6 +15,12 @@ public class ResponseAPI {
 
     private static ResponseAPI instance;
 
+    /**
+     * Gets a singleton instance of the ResponseApi with a specified message
+     *
+     * @param message to be set in the response
+     * @return A singleton instance of ResponseApi
+     */
     public static ResponseAPI getInstance(String message) {
         if (instance == null) {
             instance = new ResponseAPI();
@@ -25,6 +31,12 @@ public class ResponseAPI {
         return instance;
     }
 
+    /**
+     *
+     * @param message
+     * @param errors
+     * @return
+     */
     public static ResponseAPI getInstance(String message, String[] errors) {
         ResponseAPI instance = ResponseAPI.getInstance(message);
         instance.setError(errors);

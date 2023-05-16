@@ -1,24 +1,27 @@
 package com.cayena.backenddeveloper.model;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-@Table
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "tb_supplier")
 public class Supplier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
+    @JsonProperty( "name")
     private String name;
 
-    @Column(name = "date_of_creation")
-    private LocalDateTime dateOfCreation = LocalDateTime.now();
+    @JsonProperty("date_of_creation")
+    private String dateOfCreation;
 
-    @Column(name = "date_of_last_update")
-    private LocalDateTime dateOfLastUpdate;
+    @JsonProperty("date_of_last_update")
+    private String dateOfLastUpdate;
 
 
     public Integer getId() {
@@ -37,19 +40,19 @@ public class Supplier {
         this.name = name;
     }
 
-    public LocalDateTime getDateOfCreation() {
+    public String getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
+    public void setDateOfCreation(String dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public LocalDateTime getDateOfLastUpdate() {
+    public String getDateOfLastUpdate() {
         return dateOfLastUpdate;
     }
 
-    public void setDateOfLastUpdate(LocalDateTime dateOfLastUpdate) {
+    public void setDateOfLastUpdate(String dateOfLastUpdate) {
         this.dateOfLastUpdate = dateOfLastUpdate;
     }
 }

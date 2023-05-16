@@ -2,17 +2,14 @@ package com.cayena.backenddeveloper.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-@Entity
-@Table
+@Entity(name = "tb_product")
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -22,14 +19,16 @@ public class Product {
     @JsonProperty("unit_price")
     private BigDecimal unitPrice;
 
+    @ManyToOne
+    @JoinColumn(name = "supplier_id", referencedColumnName = "id")
     @JsonProperty("supplier_id")
-    private Integer supplierId;
+    private Supplier supplierId;
 
     @JsonProperty("date_of_creation")
-    private LocalDateTime dateOfCreation = LocalDateTime.now();
+    private String dateOfCreation;
 
     @JsonProperty("date_of_last_update")
-    private LocalDateTime dateOfLastUpdate;
+    private String dateOfLastUpdate;
 
     public Integer getId() {
         return id;
@@ -63,27 +62,27 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    public Integer getSupplierId() {
+    public Supplier getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(Integer supplierId) {
+    public void setSupplierId(Supplier supplierId) {
         this.supplierId = supplierId;
     }
 
-    public LocalDateTime getDateOfCreation() {
+    public String getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
+    public void setDateOfCreation(String dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public LocalDateTime getDateOfLastUpdate() {
+    public String getDateOfLastUpdate() {
         return dateOfLastUpdate;
     }
 
-    public void setDateOfLastUpdate(LocalDateTime dateOfLastUpdate) {
+    public void setDateOfLastUpdate(String dateOfLastUpdate) {
         this.dateOfLastUpdate = dateOfLastUpdate;
     }
 }
