@@ -40,8 +40,9 @@ Inside the application.yml you can see some mandatory fields that should be pass
 This is a simple way to define the enviroment variables using IntelliJ;
 
 ### **Click edit configurations**
-
+```
 ![image](https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/ab2a0129-08b3-4df8-9dbf-a5610142c525)
+```
 
 ### **Then you simply set your variables**
 
