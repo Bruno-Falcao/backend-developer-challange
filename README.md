@@ -38,13 +38,13 @@ To run this project you need:
 
 Inside the application.yml you can see some mandatory fields that should be passed as enviroment variables.
 
-This is a simple way to define the enviroment variables using IntelliJ;
+You can set the enviroment variable following these steps:
+1. From the main menu, select Run | 
+2. Edit Configurations or choose Edit Configurations from the run/debug configurations selector on the toolbar. 
+3. In the Run/Debug Configurations dialog, select a configuration you want to add the environment variables to. 
+4. Type the variable name and value: <name>=<value> .
 
-### **Click edit configurations**
-![image](https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/ab2a0129-08b3-4df8-9dbf-a5610142c525)
-
-
-### **Then you simply set your variables**
-![image](https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/263fdedf-a8bc-4b0e-b4bc-ef692b7cdfee)
-
-2. After downloading all dependencies you can use this Postman Collection to use the API.
+2. After downloading all project dependencies you can use this Postman Collection to use the API.
+  
+## Tests
+  You can run all tests easyly with intellij, just run using "coverage"
