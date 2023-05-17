@@ -5,15 +5,18 @@ import com.cayena.backenddeveloper.model.Product;
 import com.cayena.backenddeveloper.model.Supplier;
 import com.cayena.backenddeveloper.repository.ProductRepository;
 import com.cayena.backenddeveloper.service.ProductService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.util.Assert;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +25,8 @@ import static com.cayena.backenddeveloper.utils.Utils.currentDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-public class ProductServiceTest {
+@SpringBootTest
+public class ProductServiceTests {
 
     @Mock
     private ProductRepository productRepository;
@@ -36,21 +40,39 @@ public class ProductServiceTest {
     }
 
     @Test
-    void findAllProductsSuccess() {
-        List<Product> expectedProducts = Collections.singletonList(new Product());
-        when(productRepository.findAll()).thenReturn(expectedProducts);
+    void findAllProductsShouldSuccessWhenProductListIsNotEmpty() {
+        int page = 0;
+        int pageSize = 10;
 
-        List<Product> products = productService.findAllProducts();
+        List<Product> expectedProducts = new ArrayList<>();
+        expectedProducts.add(new Product(1, "Salt"));
+        expectedProducts.add(new Product(1, "Garlic"));
 
-        assertNotNull(products);
-        assertEquals(expectedProducts, products);
+        PageRequest pageable = PageRequest.of(page, pageSize);
+        Page<Product> pagedProduct = new PageImpl<>(expectedProducts, pageable, expectedProducts.size());
+
+        when(productRepository.findAll(pageable)).thenReturn(pagedProduct);
+
+        Page<Product> result = productService.findAllProducts(page, pageSize);
+
+        assertNotNull(result);
+        assertEquals(expectedProducts.size(), result.getContent().size());
+        assertEquals(pagedProduct.getTotalPages(), result.getTotalPages());
+        assertEquals(pagedProduct.getTotalElements(), result.getTotalElements());
     }
 
     @Test
     void findAllProductsThrowsExceptionWhenNoProductsFound() {
-        when(productRepository.findAll()).thenReturn(Collections.emptyList());
+        int page = 0;
+        int pageSize = 10;
+        List<Product> products = Collections.emptyList();
+        PageRequest pageable = PageRequest.of(page, pageSize);
 
-        assertThrows(NotFoundException.class, () -> productService.findAllProducts());
+        Page<Product> pagedProduct = new PageImpl<>(products, pageable, products.size());
+
+        when(productRepository.findAll(pageable)).thenReturn(pagedProduct);
+
+        assertThrows(NotFoundException.class, () -> productService.findAllProducts(page, pageSize));
     }
 
     @Test
