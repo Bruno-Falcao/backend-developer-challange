@@ -18,6 +18,7 @@
 - [Usage](#usage)
 - [Deployed](#deployed)
 - [Installation](#installation)
+- [PostmanDocumentation](https://documenter.getpostman.com/view/15800965/2s93kz55PV)
 
 ## Usage
 - You can use the deployed version
