@@ -7,12 +7,12 @@
 - This project is a Rest API that represents a simple Store;
 
 ## Api  endpoints🏁 
-:trophy: An endpoint to list all product;
-:trophy: An endpoint to see just one product by 'id';
-:trophy: An endpoint to insert a new product;
-:trophy: An endpoint to update a product;
-:trophy: An endpoint to delete a product;
-:trophy: An endpoint to increase or decrease the quantity stock
+- An endpoint to list all product;
+- An endpoint to see just one product by 'id';
+- An endpoint to insert a new product;
+- An endpoint to update a product;
+- An endpoint to delete a product;
+-An endpoint to increase or decrease the quantity stock
 
 ## Table of Contents
 - [Usage](#usage)
