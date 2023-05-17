@@ -25,7 +25,7 @@
 - You can download the project and run locally 
 
 ## Deployed
-You can go to the [Postman collection](https://www.postman.com/felipecorp/workspace/cayena-workspace/request/15800965-81b766e8-1710-4aa8-a0a5-a3c9c3da5084) an use the API.
+You can go to the [Postman collection](https://documenter.getpostman.com/view/15800965/2s93kz55PV) an use the API.
 
 ## Installation
 
