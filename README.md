@@ -15,10 +15,10 @@
 :trophy: An endpoint to increase or decrease the quantity stock
 
 ## Table of Contents
-- [How to use it](#howtouseit)
+- [Usage](#usage)
 - [Installation](#installation)
 
-## How to use it
+## Usage
 - You can use the deployed version
 - You can download the project and run a local project
 
