@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${CLEARDB_DATABASE_URL}
+    url: jdbc:mysql://${CLEARDB_DATABASE_URL}/${DB_NAME}
     username: ${DATABASE_USER}
     password: ${DATABASE_PASS}
   jpa:
