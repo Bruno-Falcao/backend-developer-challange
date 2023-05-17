@@ -17,13 +17,15 @@
 ## Installation
 
 To run this project you need:
-- JAVA 11
+- Java 11
 - Maven
 - MySql local instance
 
-Inside the application.yml you can see some mandatory field that should be passed as enviroment variables.
+1. First of you have to clone the repository
 
-This is a simple way to define the enviroment variables;
+Inside the application.yml you can see some mandatory fields that should be passed as enviroment variables.
+
+This is a simple way to define the enviroment variables using IntelliJ;
 
 ### **Click edit configurations**
 
@@ -33,4 +35,4 @@ This is a simple way to define the enviroment variables;
 
 ![image](https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/263fdedf-a8bc-4b0e-b4bc-ef692b7cdfee)
 
-
+2. After downloading all dependencies you can use this Postman Collection to use the APIs
