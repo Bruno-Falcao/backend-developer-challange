@@ -16,7 +16,7 @@
 
 ## Table of Contents
 - [Usage](#usage)
-- [DeployedVersion](#deployedversion)
+- [Deployed](#deployed)
 - [Installation](#installation)
 
 ## Usage
