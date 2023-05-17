@@ -40,12 +40,12 @@ Inside the application.yml you can see some mandatory fields that should be pass
 This is a simple way to define the enviroment variables using IntelliJ;
 
 ### **Click edit configurations**
-```
+```https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/ab2a0129-08b3-4df8-9dbf-a5610142c525```
 ![image](https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/ab2a0129-08b3-4df8-9dbf-a5610142c525)
-```
+
 
 ### **Then you simply set your variables**
-
+```https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/263fdedf-a8bc-4b0e-b4bc-ef692b7cdfee```
 ![image](https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/263fdedf-a8bc-4b0e-b4bc-ef692b7cdfee)
 
 2. After downloading all dependencies you can use this Postman Collection to use the APIs
