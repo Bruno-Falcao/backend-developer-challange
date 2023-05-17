@@ -124,8 +124,7 @@ public class ProductService {
 
     private static boolean updateProductValidation(Product product) {
         return product.getName() != null && product.getQuantity() >= 0
-                && product.getUnitPrice().compareTo(BigDecimal.ZERO) > 0
-                && product.getDateOfCreation() != null;
+                && product.getUnitPrice().compareTo(BigDecimal.ZERO) > 0;
     }
 
     private boolean saveProductValidation(Product product) {
