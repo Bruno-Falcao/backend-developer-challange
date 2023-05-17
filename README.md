@@ -14,12 +14,16 @@
 :trophy: An endpoint to delete a product;
 :trophy: An endpoint to increase or decrease the quantity stock
 
+## Table of Contents
+- [Installation](#installation)
+
 ## Hot to use it:
 - You can use the deployed version
 - You can download the project and run a local project
 
 ## Deployed Version
-You can enter the [Postman collection](https://www.postman.com/felipecorp/workspace/cayena-workspace/request/15800965-81b766e8-1710-4aa8-a0a5-a3c9c3da5084) an set your 
+You can enter the [Postman collection](https://www.postman.com/felipecorp/workspace/cayena-workspace/request/15800965-81b766e8-1710-4aa8-a0a5-a3c9c3da5084) an use the API freely
+
 
 
 ## Installation
