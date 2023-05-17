@@ -5,10 +5,13 @@ import com.cayena.backenddeveloper.model.Product;
 import com.cayena.backenddeveloper.model.Supplier;
 import com.cayena.backenddeveloper.repository.ProductRepository;
 import com.cayena.backenddeveloper.service.ProductService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -163,7 +166,6 @@ public class ProductServiceTest {
 
         when(productRepository.findById(productId)).thenReturn(Optional.of(existingProduct));
 
-        // Act and Assert
         assertThrows(Exception.class, () -> productService.updateProduct(updatedProduct));
     }
 
@@ -187,5 +189,35 @@ public class ProductServiceTest {
         when(productRepository.findById(productId)).thenReturn(optionalProduct);
 
         assertThrows(NotFoundException.class, () -> productService.deleteProduct(productId));
+    }
+
+    @Test
+    public void testUpdateQuantity() {
+        Product existingProduct = new Product();
+        existingProduct.setId(1);
+        existingProduct.setQuantity(10);
+
+        Mockito.when(productRepository.findById(1)).thenReturn(Optional.of(existingProduct));
+
+        String result = productService.updateQuantity(1, 20);
+
+        assertEquals("Stock updated successfully", result);
+        assertEquals(20, existingProduct.getQuantity());
+    }
+
+    @Test
+    public void testUpdateQuantityWithNegativeStockNumber() {
+        assertThrows(NotFoundException.class, () -> {
+            productService.updateQuantity(1, -10);
+        });
+    }
+
+    @Test
+    public void testUpdateQuantityWithNonExistingProduct() {
+        Mockito.when(productRepository.findById(1)).thenReturn(null);
+
+        assertThrows(NullPointerException.class, () -> {
+            productService.updateQuantity(1, 20);
+        });
     }
 }

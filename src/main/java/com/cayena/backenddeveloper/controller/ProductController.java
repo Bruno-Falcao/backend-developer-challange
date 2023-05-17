@@ -27,7 +27,7 @@ public class ProductController {
      * Saves a new product.
      *
      * @param product The product to be saved.
-     * @return A ResponseEntity with the HTTP code of 200 and response body containing a result String.
+     * @return A ResponseEntity with the HTTP code of 200 and a response body with the Success String.
      */
     @PostMapping("/save")
     public ResponseEntity<Object> saveProduct(@RequestBody Product product) {
@@ -112,7 +112,7 @@ public class ProductController {
      * Deletes a product based on ID.
      *
      * @param id of the product to be deleted.
-     * @return ResponseEntity with 200 HTTP status code and response body.
+     * @return ResponseEntity with 200 HTTP status code and a response body with Success String.
      * @throws NotFoundException if the product is not found.
      */
     @DeleteMapping("/delete")
@@ -122,6 +122,30 @@ public class ProductController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(ResponseAPI.getInstance(Collections
                             .singletonList(productService.deleteProduct(id))));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ResponseAPI.getInstance(String.format(e.getMessage()),
+                            Arrays.stream(e.getSuppressed()).map(Throwable::getMessage)
+                                    .toArray(String[]::new)));
+        }
+    }
+
+    /**
+     * Updates the stock quantity of a product.
+     *
+     * @param productId The ID of the product.
+     * @param stockNumber The new stock quantity for the product.
+     * @return ResponseEntity with the success String and status code of 200.
+     * @throws NotFoundException if the product with the given ID is not found.
+     */
+    @PatchMapping("/update_stock")
+    public ResponseEntity<Object> updateStock(@RequestParam("product_id") Integer productId,
+                                              @RequestParam("stock_number") Integer stockNumber) {
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(ResponseAPI.getInstance(Collections
+                            .singletonList(productService.updateQuantity(productId, stockNumber))));
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ResponseAPI.getInstance(String.format(e.getMessage()),

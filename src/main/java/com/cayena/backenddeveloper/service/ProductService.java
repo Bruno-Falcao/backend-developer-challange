@@ -33,11 +33,11 @@ public class ProductService {
     /**
      * Find a product using the id as parameter.
      *
-     * @param id The id of the product.
+     * @param productId The id of the product.
      * @return The specified product
      */
-    public Product findProductById(Integer id) {
-        return productRepository.findById(id)
+    public Product findProductById(Integer productId) {
+        return productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
@@ -93,6 +93,27 @@ public class ProductService {
 
         productRepository.delete(existingProduct);
         return "Product deleted";
+    }
+
+    /**
+
+     Updates the stock quantity of a product.
+
+     @param productId The ID of the product.
+     @param stockNumber The new stock quantity for the product.
+     @return A success message if the stock is updated successfully.
+     @throws IllegalArgumentException if the stock number is negative.
+     @throws NotFoundException if the product with the given ID is not found.
+     */
+    public String updateQuantity(Integer productId , Integer stockNumber) {
+        Product existingProduct = findProductById(productId);
+
+        if (stockNumber >= 0 && existingProduct != null) {
+            existingProduct.setQuantity(stockNumber);
+            productRepository.save(existingProduct);
+            return "Stock updated successfully";
+        }
+        throw new IllegalArgumentException("Stock number must not be negative");
     }
 
     private static boolean updateProductValidation(Product product) {
