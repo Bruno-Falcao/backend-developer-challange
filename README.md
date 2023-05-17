@@ -16,14 +16,14 @@
 
 ## Table of Contents
 - [Usage](#usage)
-- [Deployed](#deployed)
+- [Deployed Version](#deployed version)
 - [Installation](#installation)
 
 ## Usage
 - You can use the deployed version
 - You can download the project and run locally 
 
-## Deployed
+## Deployed Version
 You can enter the [Postman collection](https://www.postman.com/felipecorp/workspace/cayena-workspace/request/15800965-81b766e8-1710-4aa8-a0a5-a3c9c3da5084) an use the API freely
 
 
