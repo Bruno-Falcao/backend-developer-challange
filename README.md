@@ -6,14 +6,13 @@
 - This project is a case for Cayena Backend developer role;
 - This project is a Rest API that represents a simple Store;
 
-## What this API is capable of 🏁
-:trophy: 
-* An endpoint to list all product;
-* An endpoint to see just one product by 'id';
-* An endpoint to insert a new product;
-* An endpoint to update a product;
-* An endpoint to delete a product;
-- An endpoint to increase or decrease the quantity stock
+## Api  endpoints🏁 
+:trophy: An endpoint to list all product;
+:trophy: An endpoint to see just one product by 'id';
+:trophy: An endpoint to insert a new product;
+:trophy: An endpoint to update a product;
+:trophy: An endpoint to delete a product;
+:trophy: An endpoint to increase or decrease the quantity stock
 
 ## Installation
 
