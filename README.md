@@ -1,4 +1,5 @@
 # cayena-backend-developer
+> Project Status : Completed :heavy_check_mark:
 
 ## Description
 
@@ -10,7 +11,7 @@
 To run this project you need:
 - JAVA 11
 - Maven
-- A MySql local instance
+- MySql local instance
 
 Inside the application.yml you can see some mandatory field that should be passed as enviroment variables.
 
@@ -23,4 +24,5 @@ This is a simple way to define the enviroment variables;
 ### **Then you simply set your variables**
 
 ![image](https://github.com/Bruno-Falcao/cayena-backend-developer/assets/80421885/263fdedf-a8bc-4b0e-b4bc-ef692b7cdfee)
+
 
