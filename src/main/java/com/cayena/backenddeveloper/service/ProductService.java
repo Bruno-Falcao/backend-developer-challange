@@ -3,10 +3,11 @@ package com.cayena.backenddeveloper.service;
 import com.cayena.backenddeveloper.exceptions.NotFoundException;
 import com.cayena.backenddeveloper.model.Product;
 import com.cayena.backenddeveloper.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static com.cayena.backenddeveloper.utils.Utils.currentDate;
 
@@ -19,14 +20,19 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+
     /**
-     * Retrieves a list of all products.
+     * Return a paginated list of products.
      *
-     * @return A list of Product objects representing all the products in the system.
+     * @param page The page number, starts from 0.
+     * @param pageSize Represents the max number of products in each page.
+     * @return A Page object that contains the list of products for the specified page.
+     * @throws NotFoundException if no products are found.
      */
-    public List<Product> findAllProducts() {
-        List<Product> products = productRepository.findAll();
+    public Page<Product> findAllProducts(int page, int pageSize) {
+        Page<Product> products = productRepository.findAll(PageRequest.of(page, pageSize));
         isEmptyList(products);
+
         return products;
     }
 
@@ -129,7 +135,7 @@ public class ProductService {
                 && product.getDateOfLastUpdate() == null;
     }
 
-    private void isEmptyList(List<Product> products) {
+    private void isEmptyList(Page<Product> products) {
         if (products.isEmpty()) throw new NotFoundException("No products found");
     }
 }

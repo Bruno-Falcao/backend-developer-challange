@@ -30,6 +30,14 @@ public class Product {
     @JsonProperty("date_of_last_update")
     private String dateOfLastUpdate;
 
+    public Product() {
+    }
+
+    public Product(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

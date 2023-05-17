@@ -14,7 +14,7 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonProperty( "name")
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("date_of_creation")

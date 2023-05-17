@@ -3,7 +3,8 @@ package com.cayena.backenddeveloper.utils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResponseAPI {
 
@@ -32,10 +33,11 @@ public class ResponseAPI {
     }
 
     /**
-     *
-     * @param message
-     * @param errors
-     * @return
+
+     Creates a new instance of ResponseAPI with the specified message and errors.
+     @param message The message to be set in the ResponseAPI instance.
+     @param errors The array of errors to be set in the ResponseAPI instance.
+     @return ResponseAPI instance with the specified message and errors.
      */
     public static ResponseAPI getInstance(String message, String[] errors) {
         ResponseAPI instance = ResponseAPI.getInstance(message);
@@ -43,36 +45,9 @@ public class ResponseAPI {
         return instance;
     }
 
-    public static ResponseAPI getInstance(String message, Exception ex) {
-        ResponseAPI instance = getInstance(message,
-                Arrays.stream(ex.getSuppressed())
-                        .map(e -> e.getMessage())
-                        .toArray(String[]::new));
-
-        if (Objects.requireNonNull(ex.getCause().getMessage()).isEmpty()) {
-            ArrayList<String> erros = new ArrayList<>(Arrays.asList(instance.getError()));
-            erros.add(ex.getCause().getMessage());
-            erros.sort(Comparator.reverseOrder());
-            instance.setError(erros.stream().toArray(String[]::new));
-        }
-
-        return instance;
-    }
-
     public static ResponseAPI getInstance(List<Object> data) {
         ResponseAPI instance = ResponseAPI.getInstance("");
         instance.setData(data);
-        return instance;
-    }
-
-    public static ResponseAPI getInstance(String message, List<Object> data) {
-        if (instance == null) {
-            instance = new ResponseAPI();
-        }
-        instance.setMessage(message);
-        instance.setError(new String[0]);
-        instance.setData(data);
-
         return instance;
     }
 

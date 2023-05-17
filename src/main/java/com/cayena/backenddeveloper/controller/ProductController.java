@@ -24,6 +24,50 @@ public class ProductController {
     }
 
     /**
+     * Return a paginated list all products.
+     *
+     * @param page The page number, starts from 0.
+     * @param pageSize Represents the max number of products in each page.
+     * @return A ResponseEntity containing the paginated list of products as the response body
+     */
+    @GetMapping("/find_all")
+    public ResponseEntity<Object> findAllProducts(@RequestParam int page, @RequestParam("page_size") int pageSize) {
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(ResponseAPI.getInstance(Collections
+                            .singletonList(productService.findAllProducts(page, pageSize))));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ResponseAPI.getInstance(String.format(e.getMessage()),
+                            Arrays.stream(e.getSuppressed()).map(Throwable::getMessage)
+                                    .toArray(String[]::new)));
+        }
+    }
+
+    /**
+     * Returns a product by its ID.
+     *
+     * @param id of the product to return.
+     * @return A ResponseEntity with the appropriate HTTP status code and response body containing the product.
+     * @throws NotFoundException when the product is not found.
+     */
+    @GetMapping("/find_by_id")
+    public ResponseEntity<Object> findProductsById(@RequestParam Integer id) {
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(ResponseAPI.getInstance(Collections
+                            .singletonList(productService.findProductById(id))));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ResponseAPI.getInstance(String.format(e.getMessage()),
+                            Arrays.stream(e.getSuppressed()).map(Throwable::getMessage)
+                                    .toArray(String[]::new)));
+        }
+    }
+
+    /**
      * Saves a new product.
      *
      * @param product The product to be saved.
@@ -60,47 +104,6 @@ public class ProductController {
                     .body(ResponseAPI.getInstance(Collections
                             .singletonList(productService.updateProduct(product))));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(ResponseAPI.getInstance(String.format(e.getMessage()),
-                            Arrays.stream(e.getSuppressed()).map(Throwable::getMessage)
-                                    .toArray(String[]::new)));
-        }
-    }
-
-    /**
-     * Return all products.
-     * @return A ResponseEntity with status code of 200 and response body containing the list of products.
-     */
-    @GetMapping("/find_all")
-    public ResponseEntity<Object> findAllProducts() {
-        try {
-            return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(ResponseAPI.getInstance(Collections
-                            .singletonList(productService.findAllProducts())));
-        } catch (NotFoundException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(ResponseAPI.getInstance(String.format(e.getMessage()),
-                            Arrays.stream(e.getSuppressed()).map(Throwable::getMessage)
-                                    .toArray(String[]::new)));
-        }
-    }
-
-    /**
-     * Returns a product by its ID.
-     *
-     * @param id of the product to return.
-     * @return A ResponseEntity with the appropriate HTTP status code and response body containing the product.
-     * @throws NotFoundException when the product is not found.
-     */
-    @GetMapping("/find_by_id")
-    public ResponseEntity<Object> findProductsById(@RequestParam Integer id) {
-        try {
-            return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(ResponseAPI.getInstance(Collections
-                            .singletonList(productService.findProductById(id))));
-        } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ResponseAPI.getInstance(String.format(e.getMessage()),
                             Arrays.stream(e.getSuppressed()).map(Throwable::getMessage)
