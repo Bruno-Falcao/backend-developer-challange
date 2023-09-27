@@ -48,4 +48,4 @@ You can set all enviroment variables by following these steps:
 ### After downloading all project dependencies you can use this [Postman Collection](https://documenter.getpostman.com/view/15800965/2s93kz55PV) to use the API.
   
 ## Tests
-  You can run all tests easyly with intellij, just run using "coverage"
+  You can run all tests easyly with intellij
