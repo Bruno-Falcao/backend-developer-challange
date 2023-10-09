@@ -21,14 +21,6 @@ public class ProductService {
     }
 
 
-    /**
-     * Return a paginated list of products.
-     *
-     * @param page The page number, starts from 0.
-     * @param pageSize Represents the max number of products in each page.
-     * @return A Page object that contains the list of products for the specified page.
-     * @throws NotFoundException if no products are found.
-     */
     public Page<Product> findAllProducts(int page, int pageSize) {
         Page<Product> products = productRepository.findAll(PageRequest.of(page, pageSize));
         isEmptyList(products);
@@ -36,24 +28,12 @@ public class ProductService {
         return products;
     }
 
-    /**
-     * Find a product using the id as parameter.
-     *
-     * @param productId The id of the product.
-     * @return The specified product
-     */
+    
     public Product findProductById(Integer productId) {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
-    /**
-     * Save a new product.
-     *
-     * @param product The product to be saved.
-     * @return A Success String.
-     * @throws Exception If an error occurs during the saveProduct method.
-     */
     public String saveProduct(Product product) throws Exception {
         if (saveProductValidation(product)) {
             product.setDateOfCreation(currentDate());
@@ -64,13 +44,6 @@ public class ProductService {
         throw new Exception("Error saving product");
     }
 
-    /**
-     * Updates the fields of a Product.
-     *
-     * @param product
-     * @return A message that indicates the success of the operation.
-     * @throws Exception if the update validation fails or the product is not found.
-     */
     public String updateProduct(Product product) throws Exception {
         Product existingProduct = findProductById(product.getId());
 
@@ -88,12 +61,6 @@ public class ProductService {
         throw new Exception("Product not found");
     }
 
-    /**
-     * Delete a product by its ID.
-     *
-     * @param id of the Product.
-     * @return a success String.
-     */
     public String deleteProduct(Integer id) {
         Product existingProduct = findProductById(id);
 
@@ -101,16 +68,7 @@ public class ProductService {
         return "Product deleted";
     }
 
-    /**
 
-     Updates the stock quantity of a product.
-
-     @param productId The ID of the product.
-     @param stockNumber The new stock quantity for the product.
-     @return A success message if the stock is updated successfully.
-     @throws IllegalArgumentException if the stock number is negative.
-     @throws NotFoundException if the product with the given ID is not found.
-     */
     public String updateQuantity(Integer productId , Integer stockNumber) {
         Product existingProduct = findProductById(productId);
 
