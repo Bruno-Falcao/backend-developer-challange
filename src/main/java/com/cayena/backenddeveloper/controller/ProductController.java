@@ -23,13 +23,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    /**
-     * Return a paginated list all products.
-     *
-     * @param page The page number, starts from 0.
-     * @param pageSize Represents the max number of products in each page.
-     * @return A ResponseEntity containing the paginated list of products as the response body
-     */
+    
     @GetMapping("/find_all")
     public ResponseEntity<Object> findAllProducts(@RequestParam int page, @RequestParam("page_size") int pageSize) {
         try {
@@ -45,13 +39,7 @@ public class ProductController {
         }
     }
 
-    /**
-     * Returns a product by its ID.
-     *
-     * @param id of the product to return.
-     * @return A ResponseEntity with the appropriate HTTP status code and response body containing the product.
-     * @throws NotFoundException when the product is not found.
-     */
+    
     @GetMapping("/find_by_id")
     public ResponseEntity<Object> findProductsById(@RequestParam Integer id) {
         try {
@@ -67,12 +55,6 @@ public class ProductController {
         }
     }
 
-    /**
-     * Saves a new product.
-     *
-     * @param product The product to be saved.
-     * @return A ResponseEntity with the HTTP code of 200 and a response body with the Success String.
-     */
     @PostMapping("/save")
     public ResponseEntity<Object> saveProduct(@RequestBody Product product) {
         try {
@@ -89,13 +71,6 @@ public class ProductController {
         }
     }
 
-    /**
-     * Updates a specified product with the new data and updates the dateOfLastUpdate field using the current date.
-     *
-     * @param product The updated product data.
-     * @return A ResponseEntity with HTTP code of 200 and response body containing a result String.
-     */
-
     @PutMapping("/update")
     public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
         try {
@@ -111,13 +86,6 @@ public class ProductController {
         }
     }
 
-    /**
-     * Deletes a product based on ID.
-     *
-     * @param id of the product to be deleted.
-     * @return ResponseEntity with 200 HTTP status code and a response body with Success String.
-     * @throws NotFoundException if the product is not found.
-     */
     @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteProduct(@RequestParam Integer id) {
         try {
@@ -133,14 +101,7 @@ public class ProductController {
         }
     }
 
-    /**
-     * Updates the stock quantity of a product.
-     *
-     * @param productId The ID of the product.
-     * @param stockNumber The new stock quantity for the product.
-     * @return ResponseEntity with the success String and status code of 200.
-     * @throws NotFoundException if the product with the given ID is not found.
-     */
+    
     @PatchMapping("/update_stock")
     public ResponseEntity<Object> updateStock(@RequestParam("product_id") Integer productId,
                                               @RequestParam("stock_number") Integer stockNumber) {
